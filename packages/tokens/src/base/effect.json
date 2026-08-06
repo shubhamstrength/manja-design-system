@@ -1,0 +1,39 @@
+{
+  "duration": {
+    "instant": { "value": "0ms", "type": "duration" },
+    "fast": { "value": "120ms", "type": "duration" },
+    "normal": { "value": "200ms", "type": "duration" },
+    "slow": { "value": "320ms", "type": "duration" },
+    "slower": { "value": "480ms", "type": "duration" }
+  },
+
+  "easing": {
+    "linear": { "value": "linear", "type": "cubicBezier" },
+    "standard": { "value": "cubic-bezier(0.2, 0, 0, 1)", "type": "cubicBezier" },
+    "accelerate": { "value": "cubic-bezier(0.3, 0, 1, 1)", "type": "cubicBezier" },
+    "decelerate": { "value": "cubic-bezier(0, 0, 0, 1)", "type": "cubicBezier" },
+    "emphasized": { "value": "cubic-bezier(0.2, 0, 0, 1.2)", "type": "cubicBezier" }
+  },
+
+  "breakpoint": {
+    "sm": { "value": "40rem", "type": "dimension" },
+    "md": { "value": "48rem", "type": "dimension" },
+    "lg": { "value": "64rem", "type": "dimension" },
+    "xl": { "value": "80rem", "type": "dimension" },
+    "2xl": { "value": "96rem", "type": "dimension" }
+  },
+
+  "zIndex": {
+    "hide": { "value": "-1", "type": "number" },
+    "base": { "value": "0", "type": "number" },
+    "docked": { "value": "10", "type": "number" },
+    "dropdown": { "value": "1000", "type": "number" },
+    "sticky": { "value": "1100", "type": "number" },
+    "banner": { "value": "1200", "type": "number" },
+    "overlay": { "value": "1300", "type": "number" },
+    "modal": { "value": "1400", "type": "number" },
+    "popover": { "value": "1500", "type": "number" },
+    "toast": { "value": "1700", "type": "number" },
+    "tooltip": { "value": "1800", "type": "number" }
+  }
+}

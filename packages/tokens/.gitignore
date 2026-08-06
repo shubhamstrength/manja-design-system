@@ -1,0 +1,3 @@
+# Emitted by build.mjs from src/base and src/semantic.
+src/generated/
+.tmp/

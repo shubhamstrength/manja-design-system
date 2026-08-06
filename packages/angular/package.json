@@ -1,0 +1,51 @@
+{
+  "name": "@manja/angular",
+  "version": "0.0.0",
+  "description": "Angular components for the Manja Design System",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json -c tsconfig.lib.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --max-warnings 0"
+  },
+  "dependencies": {
+    "@manja/core": "workspace:*",
+    "tslib": "2.8.1"
+  },
+  "peerDependencies": {
+    "@angular/common": "^22.0.0",
+    "@angular/core": "^22.0.0"
+  },
+  "devDependencies": {
+    "@analogjs/vite-plugin-angular": "2.6.4",
+    "@angular/build": "22.1.0",
+    "@angular/common": "22.1.0",
+    "@angular/compiler": "22.1.0",
+    "@angular/compiler-cli": "22.1.0",
+    "@angular/core": "22.1.0",
+    "@angular/platform-browser": "22.1.0",
+    "@manja/styles": "workspace:*",
+    "jsdom": "30.0.1",
+    "ng-packagr": "22.1.1",
+    "rxjs": "7.8.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.10",
+    "zone.js": "0.16.0"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/dist"
+        ]
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@manja/source",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Manja Design System — a token-driven design system for React and Angular",
+  "license": "MIT",
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=11"
+  },
+  "scripts": {
+    "build": "nx run-many -t build",
+    "test": "nx run-many -t test",
+    "lint": "nx run-many -t lint",
+    "typecheck": "nx run-many -t typecheck",
+    "verify": "pnpm format:check && nx run-many -t lint typecheck test build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "graph": "nx graph"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.2",
+    "@types/node": "22.19.1",
+    "eslint": "9.39.2",
+    "nx": "23.1.1",
+    "prettier": "3.9.6",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.66.0"
+  }
+}

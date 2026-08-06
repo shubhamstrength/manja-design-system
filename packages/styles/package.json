@@ -1,0 +1,32 @@
+{
+  "name": "@manja/styles",
+  "version": "0.0.0",
+  "description": "Global stylesheet for the Manja Design System — tokens, reset, base and utility layers",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": true,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": "./dist/manja.css",
+    "./min": "./dist/manja.min.css",
+    "./reset": "./dist/reset.css",
+    "./base": "./dist/base.css",
+    "./utilities": "./dist/utilities.css",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "lint": "eslint build.mjs --max-warnings 0"
+  },
+  "devDependencies": {
+    "@manja/tokens": "workspace:*",
+    "lightningcss": "1.33.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

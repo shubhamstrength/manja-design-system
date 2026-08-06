@@ -1,0 +1,23 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+# Only build scripts we actually need. Nx resolves its native task-runner
+# binary in postinstall; esbuild/swc fetch their platform binaries.
+allowBuilds:
+  nx: true
+  esbuild: true
+  '@swc/core': true
+  # ng-packagr's watch mode; native binding.
+  '@parcel/watcher': true
+  # @angular/build's optional persistent disk cache. We only use its compiler
+  # for tests, and both fall back to pure JS, so skip the native builds.
+  lmdb: false
+  msgpackr-extract: false
+
+# Keep the compiler version identical across every package. Angular 22's
+# compiler-cli and ng-packagr both pin `typescript >=6.0 <6.1`, so the React
+# side has to stay on the same major or the two halves of the design system
+# would typecheck against different compilers.
+catalog:
+  typescript: 6.0.3

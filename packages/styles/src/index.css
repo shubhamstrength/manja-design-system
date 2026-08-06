@@ -1,0 +1,11 @@
+/**
+ * Manja Design System — stylesheet entry point.
+ *
+ * The `@layer` order statement is prepended by build.mjs, ahead of the token
+ * layer, so it is intentionally absent here. Component stylesheets added later
+ * declare `@layer mj.components { ... }` and land between base and utilities
+ * regardless of import order.
+ */
+@import './reset.css';
+@import './base.css';
+@import './utilities.css';

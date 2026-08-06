@@ -1,0 +1,17 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 90,
+  "semi": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "options": { "parser": "angular" }
+    },
+    {
+      "files": ["*.json", "*.jsonc", "*.json5"],
+      "options": { "trailingComma": "none" }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "@manja/tokens",
+  "version": "0.0.0",
+  "description": "Design tokens for the Manja Design System — CSS custom properties, JSON, and typed TS",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./css": "./dist/css/tokens.css",
+    "./css/light": "./dist/css/tokens.light.css",
+    "./css/dark": "./dist/css/tokens.dark.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens.dark.json": "./dist/tokens.dark.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "generate": "node build.mjs",
+    "build": "node build.mjs && tsc -p tsconfig.lib.json",
+    "typecheck": "tsc -p tsconfig.lib.json --noEmit",
+    "lint": "eslint src build.mjs --max-warnings 0"
+  },
+  "devDependencies": {
+    "style-dictionary": "5.5.0",
+    "typescript": "6.0.3"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/dist",
+          "{projectRoot}/src/generated"
+        ]
+      },
+      "typecheck": {
+        "// ": "Depends on its own build: src/generated is emitted by build.mjs, and letting typecheck regenerate it would race the build task for the same files.",
+        "dependsOn": [
+          "build"
+        ]
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,62 @@
+/**
+ * Document-level defaults derived from tokens, plus the shared focus-ring
+ * contract every Manja component builds on.
+ */
+@layer mj.base {
+  :where(html) {
+    font-family: var(--mj-font-family-sans);
+    font-size: 100%;
+    line-height: var(--mj-font-line-height-normal);
+    color-scheme: light;
+  }
+
+  /* Lets native controls, scrollbars and form widgets follow the theme. */
+  [data-mj-theme='dark'] {
+    color-scheme: dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-mj-theme='light']) {
+      color-scheme: dark;
+    }
+  }
+
+  :where(body) {
+    background-color: var(--mj-color-bg-canvas);
+    color: var(--mj-color-fg-default);
+    font-size: var(--mj-font-size-md);
+    font-weight: var(--mj-font-weight-regular);
+  }
+
+  :where(code, kbd, samp, pre) {
+    font-family: var(--mj-font-family-mono);
+    font-size: 0.9375em;
+  }
+
+  /**
+   * Focus ring contract.
+   *
+   * Components never hard-code focus styles; they set `--mj-focus-ring-color`
+   * if they need a different hue (destructive actions, say) and otherwise
+   * inherit. Using `:focus-visible` keeps the ring off mouse users, and the
+   * outline-based approach means the ring is never clipped by `overflow:
+   * hidden` the way a box-shadow ring would be.
+   */
+  :where(:root) {
+    --mj-focus-ring-width: var(--mj-border-width-medium);
+    --mj-focus-ring-offset: 2px;
+    --mj-focus-ring-color: var(--mj-color-ring-focus);
+    --mj-focus-ring-style: solid;
+  }
+
+  :where(:focus-visible) {
+    outline: var(--mj-focus-ring-width) var(--mj-focus-ring-style)
+      var(--mj-focus-ring-color);
+    outline-offset: var(--mj-focus-ring-offset);
+  }
+
+  ::selection {
+    background-color: var(--mj-color-bg-brand-muted);
+    color: var(--mj-color-fg-default);
+  }
+}
