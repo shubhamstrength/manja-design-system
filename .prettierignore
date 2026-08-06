@@ -4,3 +4,6 @@ coverage/
 .nx/
 pnpm-lock.yaml
 packages/tokens/dist/
+packages/tokens/src/generated/
+.angular/
+apps/*/dist/

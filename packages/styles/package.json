@@ -9,12 +9,28 @@
     "dist",
     "src"
   ],
+  "types": "./dist/manja.d.ts",
   "exports": {
-    ".": "./dist/manja.css",
-    "./min": "./dist/manja.min.css",
-    "./reset": "./dist/reset.css",
-    "./base": "./dist/base.css",
-    "./utilities": "./dist/utilities.css",
+    ".": {
+      "types": "./dist/manja.d.ts",
+      "default": "./dist/manja.css"
+    },
+    "./min": {
+      "types": "./dist/manja.d.ts",
+      "default": "./dist/manja.min.css"
+    },
+    "./reset": {
+      "types": "./dist/manja.d.ts",
+      "default": "./dist/reset.css"
+    },
+    "./base": {
+      "types": "./dist/manja.d.ts",
+      "default": "./dist/base.css"
+    },
+    "./utilities": {
+      "types": "./dist/manja.d.ts",
+      "default": "./dist/utilities.css"
+    },
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },

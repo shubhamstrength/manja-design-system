@@ -21,3 +21,6 @@ allowBuilds:
 # would typecheck against different compilers.
 catalog:
   typescript: 6.0.3
+
+minimumReleaseAgeExclude:
+  - vite@8.2.1

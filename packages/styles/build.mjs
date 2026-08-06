@@ -89,6 +89,23 @@ async function main() {
     await writeFile(path.join(DIST, `${part}.css`), `${code}\n`);
   }
 
+  /**
+   * TypeScript 6 rejects a side-effect import of a module it has no
+   * declaration for, so `import '@manja/styles'` would fail to typecheck in
+   * every consuming app. Shipping this stub fixes it once, for everyone.
+   */
+  await writeFile(
+    path.join(DIST, 'manja.d.ts'),
+    [
+      '/**',
+      ' * `@manja/styles` is a stylesheet, not a module. This declaration exists so',
+      " * that `import '@manja/styles'` typechecks; the import has no runtime exports.",
+      ' */',
+      'export {};',
+      '',
+    ].join('\n'),
+  );
+
   const bytes = Buffer.byteLength(full);
   const minBytes = Buffer.byteLength(minify(full, 'manja.css'));
   console.log(

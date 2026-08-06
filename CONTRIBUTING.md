@@ -16,7 +16,16 @@ packages/
               src/cx.ts              class name joiner
   react/      src/theme/             ThemeProvider, useTheme
   angular/    src/lib/theme/         ManjaThemeService, ManjaThemeDirective
+
+apps/
+  react-playground/     Vite + React 19      pnpm dev:react    :4200
+  angular-playground/   Angular CLI builder  pnpm dev:angular  :4300
 ```
+
+Both playgrounds render the same token gallery from `@manja/tokens` at runtime, so a new component
+should be added to both — seeing them side by side is how you catch the two frameworks disagreeing.
+Their chrome CSS (`src/playground.css`) is kept byte-identical on purpose; if it drifted, the
+comparison would prove nothing.
 
 ---
 

@@ -59,7 +59,8 @@ Angular's `ManjaThemeService` are wrappers over it — roughly 40 lines each.
 
 ## Prerequisites
 
-- **Node 22+**
+- **Node `^22.22.3 || ^24.15.0 || >=26`** — pinned in `.nvmrc` (22.23.2). Angular 22 enforces this
+  floor and `ng build` refuses to start below it. Run `nvm use` in the repo root.
 - **pnpm 11+**
 
 > **Note:** on this machine pnpm was installed to `~/.local/bin`, because `corepack enable` could
@@ -73,9 +74,40 @@ Angular's `ManjaThemeService` are wrappers over it — roughly 40 lines each.
 > Alternatively `sudo corepack enable` to install pnpm globally instead.
 
 ```sh
+nvm use
 pnpm install
 pnpm verify        # format check + lint + typecheck + test + build
 ```
+
+---
+
+## Playgrounds
+
+Two apps consume the packages straight from the workspace through pnpm links — nothing is
+published, and they resolve the same `dist` output a real consumer would get. Both render the
+identical token gallery, so you can put them side by side and confirm the two frameworks agree.
+
+```sh
+pnpm dev:react     # http://localhost:4200
+pnpm dev:angular   # http://localhost:4300
+```
+
+| App                       | Stack                          | Proves                                              |
+| ------------------------- | ------------------------------ | --------------------------------------------------- |
+| `apps/react-playground`   | Vite 8 + React 19              | The `tsc`-built ESM packages consume cleanly        |
+| `apps/angular-playground` | Angular CLI (`@angular/build`) | ng-packagr's partial-Ivy output survives the linker |
+
+The Angular playground deliberately uses the **real Angular CLI builder** rather than the Vite
+setup used for unit tests, because that is the bundler your Angular consumers will actually run.
+
+Nx builds the packages first — `pnpm dev:react` after changing a token gives you the new value.
+
+> **Angular: critical-CSS inlining is disabled on purpose.** Angular's `inlineCritical`
+> optimisation (beasties) inlines only the selectors it sees used in the static markup and defers
+> the rest with `media="print"`. It keeps `:root` but drops the `[data-mj-theme='dark']` block, so
+> a dark-theme user gets exactly the flash the init script exists to prevent. Any app consuming
+> Manja needs `optimization.styles.inlineCritical: false`, or an equivalent way to keep the theme
+> blocks render-blocking.
 
 ---
 
@@ -223,8 +255,9 @@ Nx caches every target; a no-op `pnpm verify` finishes in well under a second.
 
 ## Status
 
-The foundation is complete and verified end to end: tokens, styles, headless core, and both
-framework packages build, typecheck, lint and test from clean.
+The foundation is complete and verified end to end: tokens, styles, headless core, both framework
+packages, and both playground apps build, typecheck, lint and test from clean — 23 Nx tasks across
+7 projects.
 
 **No visual components exist yet** — that is deliberate, and next. See
 [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow that adds one to both frameworks at once.

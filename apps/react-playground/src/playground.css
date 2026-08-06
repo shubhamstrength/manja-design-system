@@ -1,0 +1,193 @@
+/**
+ * Playground chrome only — none of this is part of the design system.
+ *
+ * Deliberately unlayered. Every Manja style sits inside an `@layer`, and
+ * unlayered CSS beats all layers, so an app can always win without
+ * `!important`. This file is the proof.
+ */
+
+.pg-shell {
+  max-inline-size: 72rem;
+  margin-inline: auto;
+  padding: var(--mj-space-6) var(--mj-space-5) var(--mj-space-10);
+}
+
+.pg-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mj-space-4);
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-block-end: var(--mj-space-5);
+  border-block-end: var(--mj-border-width-thin) solid var(--mj-color-border-default);
+}
+
+.pg-title {
+  font-size: var(--mj-font-size-3xl);
+  font-weight: var(--mj-font-weight-bold);
+  letter-spacing: var(--mj-font-letter-spacing-tight);
+}
+
+.pg-subtitle {
+  margin-block-start: var(--mj-space-1);
+  color: var(--mj-color-fg-muted);
+  font-size: var(--mj-font-size-sm);
+}
+
+.pg-section {
+  margin-block-start: var(--mj-space-8);
+}
+
+.pg-section-title {
+  font-size: var(--mj-font-size-xl);
+  font-weight: var(--mj-font-weight-semibold);
+}
+
+.pg-section-note {
+  margin-block: var(--mj-space-1) var(--mj-space-4);
+  color: var(--mj-color-fg-muted);
+  font-size: var(--mj-font-size-sm);
+  max-inline-size: 60ch;
+}
+
+.pg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--mj-space-3);
+}
+
+.pg-card {
+  padding: var(--mj-space-3);
+  background-color: var(--mj-color-bg-surface);
+  border: var(--mj-border-width-thin) solid var(--mj-color-border-default);
+  border-radius: var(--mj-radius-lg);
+}
+
+.pg-swatch {
+  block-size: 3rem;
+  border: var(--mj-border-width-thin) solid var(--mj-color-border-muted);
+  border-radius: var(--mj-radius-md);
+}
+
+.pg-label {
+  margin-block-start: var(--mj-space-2);
+  font-family: var(--mj-font-family-mono);
+  font-size: var(--mj-font-size-xs);
+  color: var(--mj-color-fg-muted);
+  overflow-wrap: anywhere;
+}
+
+.pg-name {
+  color: var(--mj-color-fg-default);
+  font-weight: var(--mj-font-weight-medium);
+}
+
+.pg-ramp {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  border-radius: var(--mj-radius-md);
+  overflow: hidden;
+}
+
+.pg-ramp-step {
+  block-size: 2.75rem;
+}
+
+.pg-ramp-row {
+  margin-block-end: var(--mj-space-4);
+}
+
+.pg-ramp-name {
+  margin-block-end: var(--mj-space-1);
+  font-family: var(--mj-font-family-mono);
+  font-size: var(--mj-font-size-xs);
+  color: var(--mj-color-fg-muted);
+}
+
+.pg-row {
+  display: flex;
+  align-items: center;
+  gap: var(--mj-space-3);
+  padding-block: var(--mj-space-1);
+}
+
+.pg-row-key {
+  inline-size: 9rem;
+  flex-shrink: 0;
+  font-family: var(--mj-font-family-mono);
+  font-size: var(--mj-font-size-xs);
+  color: var(--mj-color-fg-muted);
+}
+
+.pg-bar {
+  block-size: var(--mj-space-3);
+  background-color: var(--mj-color-bg-brand);
+  border-radius: var(--mj-radius-xs);
+}
+
+.pg-controls {
+  display: flex;
+  gap: var(--mj-space-2);
+  align-items: center;
+}
+
+/* A minimal button, so the playground has something focusable to demo the
+   design system's global focus ring on. Not a design system component. */
+.pg-button {
+  padding: var(--mj-space-2) var(--mj-space-3);
+  background-color: var(--mj-color-bg-surface);
+  color: var(--mj-color-fg-default);
+  border: var(--mj-border-width-thin) solid var(--mj-color-border-strong);
+  border-radius: var(--mj-radius-md);
+  font-size: var(--mj-font-size-sm);
+  font-weight: var(--mj-font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--mj-duration-fast) var(--mj-easing-standard);
+}
+
+.pg-button:hover {
+  background-color: var(--mj-color-bg-subtle);
+}
+
+.pg-button[aria-pressed='true'] {
+  background-color: var(--mj-color-bg-brand);
+  color: var(--mj-color-fg-on-brand);
+  border-color: var(--mj-color-border-brand);
+}
+
+.pg-badge {
+  padding: var(--mj-space-1) var(--mj-space-2);
+  background-color: var(--mj-color-bg-brand-subtle);
+  color: var(--mj-color-fg-brand);
+  border-radius: var(--mj-radius-full);
+  font-size: var(--mj-font-size-xs);
+  font-weight: var(--mj-font-weight-medium);
+}
+
+.pg-intents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mj-space-2);
+}
+
+/* Proves each intent pairs with a foreground token that actually passes
+   contrast — white on amber would not. */
+.pg-intent {
+  padding: var(--mj-space-2) var(--mj-space-4);
+  border-radius: var(--mj-radius-md);
+  font-size: var(--mj-font-size-sm);
+  font-weight: var(--mj-font-weight-medium);
+}
+
+.pg-shadow-box {
+  block-size: 4rem;
+  background-color: var(--mj-color-bg-surface);
+  border-radius: var(--mj-radius-lg);
+}
+
+.pg-type-sample {
+  color: var(--mj-color-fg-default);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
