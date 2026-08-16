@@ -9,6 +9,17 @@ import type { ReactNode } from 'react';
 
 const RAMPS = ['neutral', 'brand', 'red', 'amber', 'green', 'cyan'] as const;
 
+/** The semantic radius tokens — what component CSS is allowed to reference. */
+const SHAPE = [
+  ['control', 'buttons, chips, badges'],
+  ['field', 'inputs, selects'],
+  ['fieldMultiline', 'textareas'],
+  ['surface', 'cards, dialogs, panels'],
+  ['overlay', 'popovers, menus, tooltips'],
+  ['selection', 'checkboxes'],
+  ['circle', 'radios, avatars, icon buttons'],
+] as const;
+
 const INTENTS = [
   ['brand', cssVars.color.bg.brand, cssVars.color.fg.onBrand],
   ['danger', cssVars.color.bg.danger, cssVars.color.fg.onDanger],
@@ -153,22 +164,65 @@ export function TokenGallery() {
         ))}
       </Section>
 
-      <Section title="Radius">
+      <Section
+        title="Shape — semantic"
+        note="Manja is a circular system: controls are pills, surfaces are generously
+              rounded. Component CSS references these tokens and never a raw step, so
+              re-pointing one of them re-shapes everything that uses it."
+      >
         <div className="pg-grid">
-          {Object.entries(cssVars.radius).map(([name, varRef]) => (
+          {SHAPE.map(([name, usage]) => (
             <div className="pg-card" key={name}>
               <div
-                className="pg-swatch"
-                style={{
-                  borderRadius: varRef,
-                  backgroundColor: cssVars.color.bg.brandMuted,
-                }}
+                className="pg-shape-box"
+                style={{ borderRadius: cssVars.radius[name] }}
               />
               <div className="pg-label">
                 <span className="pg-name">radius.{name}</span>
+                <br />
+                {usage}
               </div>
             </div>
           ))}
+        </div>
+      </Section>
+
+      <Section
+        title="Shape — native elements"
+        note="These are bare HTML elements, styled here for colour and size only — not one
+              border-radius among them. The rounding comes from the design system's base
+              layer, so an unstyled control already belongs."
+      >
+        <div className="pg-native">
+          <button type="button">Button</button>
+          <input placeholder="Text input" />
+          <select>
+            <option>Select</option>
+          </select>
+          <textarea placeholder="Textarea" />
+          <input type="checkbox" defaultChecked aria-label="Checkbox" />
+          <input type="radio" defaultChecked aria-label="Radio" />
+        </div>
+      </Section>
+
+      <Section
+        title="Radius — base scale"
+        note="The raw steps the semantic tokens point at. Reach for these only when
+              defining a new semantic token."
+      >
+        <div className="pg-grid">
+          {Object.entries(cssVars.radius)
+            .filter(([name]) => !SHAPE.some(([semantic]) => semantic === name))
+            .map(([name, varRef]) => (
+              <div className="pg-card" key={name}>
+                <div className="pg-shape-box" style={{ borderRadius: varRef }} />
+                <div className="pg-label">
+                  <span className="pg-name">radius.{name}</span>
+                  <br />
+                  {tokens.radius[name as keyof typeof tokens.radius]}
+                </div>
+              </div>
+            ))}
         </div>
       </Section>
 

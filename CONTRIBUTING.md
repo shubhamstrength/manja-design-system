@@ -80,6 +80,11 @@ Rules that matter:
 
 - **Always wrap in `@layer mj.components`.** Unlayered app CSS then beats the design system
   without anyone needing `!important`.
+- **Use a semantic radius token, never a raw step.** `var(--mj-radius-control)` for anything
+  interactive, `--mj-radius-surface` for cards and panels, `--mj-radius-overlay` for floating
+  things. Writing `var(--mj-radius-xl)` in a component hard-codes the shape language into that
+  component and breaks the ability to re-shape the system from one file. The full list is in the
+  README's Shape section, and both playgrounds render it.
 - **Never write a focus style.** `:focus-visible` is handled globally in `base.css`. If a component
   needs a different ring colour, set `--mj-focus-ring-color` on it.
 - **Use the matching `fg-on-*` token** for text on a filled background. White on

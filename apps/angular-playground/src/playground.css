@@ -7,6 +7,10 @@
  *
  * Kept byte-identical to the React playground on purpose: if the chrome
  * differed, comparing the two frameworks side by side would prove nothing.
+ *
+ * Note that every rounded corner below points at a *semantic* radius token
+ * (`--mj-radius-control`, `--mj-radius-surface`), never a raw step. That is
+ * the same discipline component CSS has to follow.
  */
 
 .pg-shell {
@@ -63,13 +67,13 @@
   padding: var(--mj-space-3);
   background-color: var(--mj-color-bg-surface);
   border: var(--mj-border-width-thin) solid var(--mj-color-border-default);
-  border-radius: var(--mj-radius-lg);
+  border-radius: var(--mj-radius-surface);
 }
 
 .pg-swatch {
   block-size: 3rem;
   border: var(--mj-border-width-thin) solid var(--mj-color-border-muted);
-  border-radius: var(--mj-radius-md);
+  border-radius: var(--mj-radius-overlay);
 }
 
 .pg-label {
@@ -88,7 +92,7 @@
 .pg-ramp {
   display: grid;
   grid-template-columns: repeat(11, 1fr);
-  border-radius: var(--mj-radius-md);
+  border-radius: var(--mj-radius-control);
   overflow: hidden;
 }
 
@@ -125,27 +129,34 @@
 .pg-bar {
   block-size: var(--mj-space-3);
   background-color: var(--mj-color-bg-brand);
-  border-radius: var(--mj-radius-xs);
+  border-radius: var(--mj-radius-control);
 }
 
 .pg-controls {
   display: flex;
   gap: var(--mj-space-2);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* A minimal button, so the playground has something focusable to demo the
-   design system's global focus ring on. Not a design system component. */
+   design system's global focus ring on. Not a design system component —
+   note it sets no border-radius of its own; the pill comes from mj.base. */
 .pg-button {
-  padding: var(--mj-space-2) var(--mj-space-3);
+  padding: var(--mj-space-2) var(--mj-space-4);
   background-color: var(--mj-color-bg-surface);
   color: var(--mj-color-fg-default);
   border: var(--mj-border-width-thin) solid var(--mj-color-border-strong);
-  border-radius: var(--mj-radius-md);
   font-size: var(--mj-font-size-sm);
   font-weight: var(--mj-font-weight-medium);
   cursor: pointer;
   transition: background-color var(--mj-duration-fast) var(--mj-easing-standard);
+}
+
+/* <a> is not a control, so it needs the token applied explicitly. */
+a.pg-button {
+  border-radius: var(--mj-radius-control);
+  text-decoration: none;
 }
 
 .pg-button:hover {
@@ -159,10 +170,10 @@
 }
 
 .pg-badge {
-  padding: var(--mj-space-1) var(--mj-space-2);
+  padding: var(--mj-space-1) var(--mj-space-3);
   background-color: var(--mj-color-bg-brand-subtle);
   color: var(--mj-color-fg-brand);
-  border-radius: var(--mj-radius-full);
+  border-radius: var(--mj-radius-control);
   font-size: var(--mj-font-size-xs);
   font-weight: var(--mj-font-weight-medium);
 }
@@ -176,8 +187,8 @@
 /* Proves each intent pairs with a foreground token that actually passes
    contrast — white on amber would not. */
 .pg-intent {
-  padding: var(--mj-space-2) var(--mj-space-4);
-  border-radius: var(--mj-radius-md);
+  padding: var(--mj-space-2) var(--mj-space-5);
+  border-radius: var(--mj-radius-control);
   font-size: var(--mj-font-size-sm);
   font-weight: var(--mj-font-weight-medium);
 }
@@ -185,7 +196,7 @@
 .pg-shadow-box {
   block-size: 4rem;
   background-color: var(--mj-color-bg-surface);
-  border-radius: var(--mj-radius-lg);
+  border-radius: var(--mj-radius-surface);
 }
 
 .pg-type-sample {
@@ -193,4 +204,59 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pg-shape-box {
+  block-size: 4rem;
+  background-color: var(--mj-color-bg-brand-muted);
+  border: var(--mj-border-width-thin) solid var(--mj-color-border-brand);
+}
+
+/**
+ * Bare native elements. Everything here is styled for colour and size only —
+ * not one `border-radius` — so the rounding on show comes entirely from the
+ * design system's base layer.
+ */
+.pg-native {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--mj-space-3);
+  align-items: center;
+  padding: var(--mj-space-4);
+  background-color: var(--mj-color-bg-sunken);
+  border-radius: var(--mj-radius-surface);
+}
+
+.pg-native :where(button, input:not([type='checkbox'], [type='radio']), select) {
+  padding: var(--mj-space-2) var(--mj-space-4);
+  border: var(--mj-border-width-thin) solid var(--mj-color-border-strong);
+  background-color: var(--mj-color-bg-surface);
+  color: var(--mj-color-fg-default);
+  font-size: var(--mj-font-size-sm);
+}
+
+.pg-native textarea {
+  padding: var(--mj-space-2) var(--mj-space-4);
+  border: var(--mj-border-width-thin) solid var(--mj-color-border-strong);
+  background-color: var(--mj-color-bg-surface);
+  color: var(--mj-color-fg-default);
+  font-size: var(--mj-font-size-sm);
+  min-block-size: 4.5rem;
+  inline-size: 14rem;
+}
+
+/* `appearance: none` is required for a checkbox or radio to honour a radius
+   at all — the native widget paints its own shape otherwise. */
+.pg-native :where([type='checkbox'], [type='radio']) {
+  appearance: none;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: var(--mj-border-width-medium) solid var(--mj-color-border-strong);
+  background-color: var(--mj-color-bg-surface);
+  cursor: pointer;
+}
+
+.pg-native :where([type='checkbox'], [type='radio']):checked {
+  background-color: var(--mj-color-bg-brand);
+  border-color: var(--mj-color-border-brand);
 }

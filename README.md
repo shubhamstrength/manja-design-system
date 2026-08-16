@@ -201,8 +201,8 @@ import { themeInitScript } from '@manja/react'; // or '@manja/angular'
 
 ## Tokens
 
-223 CSS custom properties, all prefixed `--mj-`. 65 semantic tokens are defined per theme, and the
-build **fails** if light and dark ever fall out of sync.
+230 CSS custom properties, all prefixed `--mj-`. 65 semantic colour tokens are defined per theme,
+and the build **fails** if light and dark ever fall out of sync.
 
 ```
 Base ramps      --mj-color-brand-600      raw palette, theme-independent
@@ -226,6 +226,30 @@ re-themes light and dark together:
 **Contrast is a deliberate part of the token set.** Each intent carries its own foreground token
 (`--mj-color-fg-on-warning` is near-black, `--mj-color-fg-on-brand` is white) because white text on
 amber fails WCAG AA badly. Reach for the matching `fg-on-*` token rather than assuming white.
+
+### Shape
+
+Manja is a **circular** system. Interactive controls are pills; surfaces are generously rounded at
+20px. Native HTML elements get it from the base layer, so a plain `<button>` is already a pill
+before any component wraps it.
+
+| Token                         | Resolves to | Used by                       |
+| ----------------------------- | ----------- | ----------------------------- |
+| `--mj-radius-control`         | pill        | buttons, chips, badges        |
+| `--mj-radius-field`           | pill        | inputs, selects               |
+| `--mj-radius-field-multiline` | 16px        | textareas                     |
+| `--mj-radius-surface`         | **20px**    | cards, dialogs, panels        |
+| `--mj-radius-overlay`         | 16px        | popovers, menus, tooltips     |
+| `--mj-radius-selection`       | 8px         | checkboxes                    |
+| `--mj-radius-circle`          | pill        | radios, avatars, icon buttons |
+
+Component CSS references these **semantic** tokens, never a raw step like `--mj-radius-xl`. That is
+what makes the shape language swappable: re-point `--mj-radius-control` at `--mj-radius-sm` and the
+entire system turns square in one edit, with no component touched.
+
+Two shapes are deliberately _not_ pills. A multi-line pill reads as a lozenge, so textareas stay
+merely rounded; and a pill checkbox is indistinguishable from a radio, so checkboxes get a rounded
+square. Both are visible side by side in the playgrounds.
 
 ### Rebranding
 

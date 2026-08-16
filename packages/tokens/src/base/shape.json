@@ -1,0 +1,11 @@
+{
+  "radius": {
+    "control": { "value": "{radius.full}", "type": "dimension" },
+    "field": { "value": "{radius.full}", "type": "dimension" },
+    "fieldMultiline": { "value": "{radius.lg}", "type": "dimension" },
+    "surface": { "value": "{radius.xl}", "type": "dimension" },
+    "overlay": { "value": "{radius.lg}", "type": "dimension" },
+    "selection": { "value": "{radius.sm}", "type": "dimension" },
+    "circle": { "value": "{radius.full}", "type": "dimension" }
+  }
+}

@@ -59,4 +59,50 @@
     background-color: var(--mj-color-bg-brand-muted);
     color: var(--mj-color-fg-default);
   }
+
+  /**
+   * Shape language.
+   *
+   * Manja is a circular system: interactive controls are pills, surfaces are
+   * generously rounded. Native elements get it for free, so a plain <button>
+   * already looks like it belongs before any component wraps it.
+   *
+   * Every rule points at a *semantic* radius token, never a raw step. Re-point
+   * `--mj-radius-control` once and every button, chip and badge re-shapes —
+   * that is what makes the shape language swappable rather than sprayed across
+   * a hundred component rules.
+   *
+   * Still zero specificity: the `:not()` sits inside `:where()`, which would
+   * otherwise contribute its argument's specificity and break the promise that
+   * an app can override any of this with a plain selector.
+   */
+  :where(button, [type='button'], [type='submit'], [type='reset']) {
+    border-radius: var(--mj-radius-control);
+  }
+
+  :where(input:not([type='checkbox'], [type='radio']), select) {
+    border-radius: var(--mj-radius-field);
+  }
+
+  /* A multi-line pill reads as a lozenge, so text areas stay merely rounded. */
+  :where(textarea) {
+    border-radius: var(--mj-radius-field-multiline);
+  }
+
+  :where([type='checkbox']) {
+    border-radius: var(--mj-radius-selection);
+  }
+
+  :where([type='radio']) {
+    border-radius: var(--mj-radius-circle);
+  }
+
+  :where(dialog, fieldset) {
+    border-radius: var(--mj-radius-surface);
+  }
+
+  :where(progress, meter) {
+    border-radius: var(--mj-radius-control);
+    overflow: hidden;
+  }
 }
