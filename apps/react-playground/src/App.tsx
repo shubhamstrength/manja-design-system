@@ -1,3 +1,4 @@
+import { ComponentGallery } from './ComponentGallery.js';
 import { ThemeSwitcher } from './ThemeSwitcher.js';
 import { TokenGallery } from './TokenGallery.js';
 
@@ -15,6 +16,7 @@ export function App() {
         <ThemeSwitcher />
       </header>
 
+      <ComponentGallery />
       <TokenGallery />
     </main>
   );

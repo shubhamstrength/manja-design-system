@@ -1,3 +1,6 @@
+export { Button } from './button/Button.js';
+export type { ButtonProps } from './button/Button.js';
+
 export { ThemeProvider } from './theme/ThemeProvider.js';
 export type { ThemeProviderProps } from './theme/ThemeProvider.js';
 

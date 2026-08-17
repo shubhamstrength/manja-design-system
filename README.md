@@ -162,6 +162,44 @@ export class ThemeToggleComponent {
 
 ---
 
+## Components
+
+### Button
+
+```tsx
+<Button variant="outline" intent="danger" size="lg">Delete</Button>
+<Button iconOnly aria-label="Add"><PlusIcon /></Button>
+```
+
+```html
+<button mjButton variant="outline" intent="danger" size="lg">Delete</button>
+<button mjButton iconOnly aria-label="Add"><svg>…</svg></button>
+```
+
+| Prop / input | Values                                                | Default  |
+| ------------ | ----------------------------------------------------- | -------- |
+| `variant`    | `solid` `soft` `outline` `ghost` `link`               | `solid`  |
+| `intent`     | `brand` `neutral` `danger` `warning` `success` `info` | `brand`  |
+| `size`       | `xs` `sm` `md` `lg` `xl`                              | `md`     |
+| `type`       | `button` `submit` `reset`                             | `button` |
+| `fullWidth`  | boolean                                               | `false`  |
+| `iconOnly`   | boolean                                               | `false`  |
+
+Three behaviours worth knowing:
+
+**`type` defaults to `button`, not `submit`.** The native default silently posts the surrounding
+form; opting into submission should be deliberate.
+
+**An icon-only button must have an accessible name.** In React that is a compile error — the props
+are a union, so `<Button iconOnly>` without `aria-label` does not typecheck. Angular templates
+cannot encode that, so it logs a dev-mode warning instead.
+
+**Thirty variant/intent combinations, eleven CSS blocks.** Each intent publishes a small palette of
+private custom properties and each variant decides which to paint with. Adding an intent is one
+block, not five.
+
+---
+
 ## Theming
 
 Themes are driven by one attribute on `<html>`:
@@ -283,5 +321,6 @@ The foundation is complete and verified end to end: tokens, styles, headless cor
 packages, and both playground apps build, typecheck, lint and test from clean — 23 Nx tasks across
 7 projects.
 
-**No visual components exist yet** — that is deliberate, and next. See
-[CONTRIBUTING.md](CONTRIBUTING.md) for the workflow that adds one to both frameworks at once.
+`Button` is the first shipped component and the reference implementation. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the workflow that adds the next one to both frameworks at
+once.

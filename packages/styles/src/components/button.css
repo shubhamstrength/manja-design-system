@@ -1,0 +1,285 @@
+/**
+ * Button.
+ *
+ * Five variants x six intents is thirty combinations. Rather than write thirty
+ * rule blocks, each *intent* publishes a small palette of private custom
+ * properties and each *variant* decides which of them to paint with — six
+ * palettes plus five variants instead. Adding an intent is one block; adding a
+ * variant is one block.
+ *
+ * Variants are `data-*` attributes so React props and Angular host bindings map
+ * onto the same CSS with no translation layer.
+ */
+@layer mj.components {
+  .mj-button {
+    /* Default palette is brand, so a hand-written `<button class="mj-button">`
+       with no data attributes still renders correctly. */
+    --_btn-bg: var(--mj-color-bg-brand);
+    --_btn-bg-hover: var(--mj-color-bg-brand-hover);
+    --_btn-bg-active: var(--mj-color-bg-brand-active);
+    --_btn-on: var(--mj-color-fg-on-brand);
+    --_btn-soft: var(--mj-color-bg-brand-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-brand-muted);
+    --_btn-line: var(--mj-color-border-brand);
+    --_btn-text: var(--mj-color-fg-brand);
+
+    --_btn-size: var(--mj-control-height-md);
+    --_btn-icon: var(--mj-icon-size-md);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--mj-space-2);
+
+    block-size: var(--_btn-size);
+    padding-inline: var(--mj-space-4);
+
+    font-family: inherit;
+    font-size: var(--mj-font-size-md);
+    font-weight: var(--mj-font-weight-medium);
+    line-height: var(--mj-font-line-height-none);
+    text-decoration: none;
+    white-space: nowrap;
+
+    border: var(--mj-border-width-thin) solid transparent;
+    border-radius: var(--mj-radius-control);
+    cursor: pointer;
+    user-select: none;
+
+    /* Globally neutralised under prefers-reduced-motion by the reset layer. */
+    transition:
+      background-color var(--mj-duration-fast) var(--mj-easing-standard),
+      border-color var(--mj-duration-fast) var(--mj-easing-standard),
+      color var(--mj-duration-fast) var(--mj-easing-standard);
+  }
+
+  /* Icons track the label size and never shrink under a long label. */
+  .mj-button :where(svg) {
+    inline-size: var(--_btn-icon);
+    block-size: var(--_btn-icon);
+    flex-shrink: 0;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Intent palettes
+   * ---------------------------------------------------------------- */
+  .mj-button[data-intent='brand'] {
+    --_btn-bg: var(--mj-color-bg-brand);
+    --_btn-bg-hover: var(--mj-color-bg-brand-hover);
+    --_btn-bg-active: var(--mj-color-bg-brand-active);
+    --_btn-on: var(--mj-color-fg-on-brand);
+    --_btn-soft: var(--mj-color-bg-brand-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-brand-muted);
+    --_btn-line: var(--mj-color-border-brand);
+    --_btn-text: var(--mj-color-fg-brand);
+  }
+
+  .mj-button[data-intent='danger'] {
+    --_btn-bg: var(--mj-color-bg-danger);
+    --_btn-bg-hover: var(--mj-color-bg-danger-hover);
+    --_btn-bg-active: var(--mj-color-bg-danger-active);
+    --_btn-on: var(--mj-color-fg-on-danger);
+    --_btn-soft: var(--mj-color-bg-danger-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-danger-muted);
+    --_btn-line: var(--mj-color-border-danger);
+    --_btn-text: var(--mj-color-fg-danger);
+
+    /* The focus-ring contract from mj.base: destructive actions ring red. */
+    --mj-focus-ring-color: var(--mj-color-ring-danger);
+  }
+
+  .mj-button[data-intent='warning'] {
+    --_btn-bg: var(--mj-color-bg-warning);
+    --_btn-bg-hover: var(--mj-color-bg-warning-hover);
+    --_btn-bg-active: var(--mj-color-bg-warning-active);
+    --_btn-on: var(--mj-color-fg-on-warning);
+    --_btn-soft: var(--mj-color-bg-warning-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-warning-muted);
+    --_btn-line: var(--mj-color-border-warning);
+    --_btn-text: var(--mj-color-fg-warning);
+  }
+
+  .mj-button[data-intent='success'] {
+    --_btn-bg: var(--mj-color-bg-success);
+    --_btn-bg-hover: var(--mj-color-bg-success-hover);
+    --_btn-bg-active: var(--mj-color-bg-success-active);
+    --_btn-on: var(--mj-color-fg-on-success);
+    --_btn-soft: var(--mj-color-bg-success-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-success-muted);
+    --_btn-line: var(--mj-color-border-success);
+    --_btn-text: var(--mj-color-fg-success);
+  }
+
+  .mj-button[data-intent='info'] {
+    --_btn-bg: var(--mj-color-bg-info);
+    --_btn-bg-hover: var(--mj-color-bg-info-hover);
+    --_btn-bg-active: var(--mj-color-bg-info-active);
+    --_btn-on: var(--mj-color-fg-on-info);
+    --_btn-soft: var(--mj-color-bg-info-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-info-muted);
+    --_btn-line: var(--mj-color-border-info);
+    --_btn-text: var(--mj-color-fg-info);
+  }
+
+  /**
+   * Neutral is the secondary action. Its solid form is a light surface rather
+   * than a black slab — a full-contrast neutral button competes with the
+   * primary one wherever the two sit side by side.
+   */
+  .mj-button[data-intent='neutral'] {
+    --_btn-bg: var(--mj-color-bg-subtle);
+    --_btn-bg-hover: var(--mj-color-bg-muted);
+    --_btn-bg-active: var(--mj-color-bg-muted);
+    --_btn-on: var(--mj-color-fg-default);
+    --_btn-soft: var(--mj-color-bg-subtle);
+    --_btn-soft-hover: var(--mj-color-bg-muted);
+    --_btn-line: var(--mj-color-border-strong);
+    --_btn-text: var(--mj-color-fg-default);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Variants
+   * ---------------------------------------------------------------- */
+  .mj-button[data-variant='solid'] {
+    background-color: var(--_btn-bg);
+    color: var(--_btn-on);
+  }
+
+  .mj-button[data-variant='solid']:hover:not(:disabled, [aria-disabled='true']) {
+    background-color: var(--_btn-bg-hover);
+  }
+
+  .mj-button[data-variant='solid']:active:not(:disabled, [aria-disabled='true']) {
+    background-color: var(--_btn-bg-active);
+  }
+
+  .mj-button[data-variant='soft'] {
+    background-color: var(--_btn-soft);
+    color: var(--_btn-text);
+  }
+
+  .mj-button[data-variant='soft']:hover:not(:disabled, [aria-disabled='true']) {
+    background-color: var(--_btn-soft-hover);
+  }
+
+  .mj-button[data-variant='outline'] {
+    background-color: transparent;
+    color: var(--_btn-text);
+    border-color: var(--_btn-line);
+  }
+
+  .mj-button[data-variant='outline']:hover:not(:disabled, [aria-disabled='true']) {
+    background-color: var(--_btn-soft);
+  }
+
+  .mj-button[data-variant='ghost'] {
+    background-color: transparent;
+    color: var(--_btn-text);
+  }
+
+  .mj-button[data-variant='ghost']:hover:not(:disabled, [aria-disabled='true']) {
+    background-color: var(--_btn-soft);
+  }
+
+  /**
+   * Link drops the control box entirely: no height, no inline padding, so it
+   * sits on the text baseline inside a paragraph instead of floating.
+   */
+  .mj-button[data-variant='link'] {
+    background-color: transparent;
+    color: var(--_btn-text);
+    block-size: auto;
+    padding-inline: 0;
+    border-radius: var(--mj-radius-sm);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .mj-button[data-variant='link']:hover:not(:disabled, [aria-disabled='true']) {
+    text-decoration-thickness: 2px;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Sizes
+   * ---------------------------------------------------------------- */
+  .mj-button[data-size='xs'] {
+    --_btn-size: var(--mj-control-height-xs);
+    --_btn-icon: var(--mj-icon-size-xs);
+    padding-inline: var(--mj-space-2);
+    font-size: var(--mj-font-size-xs);
+    gap: var(--mj-space-1);
+  }
+
+  .mj-button[data-size='sm'] {
+    --_btn-size: var(--mj-control-height-sm);
+    --_btn-icon: var(--mj-icon-size-sm);
+    padding-inline: var(--mj-space-3);
+    font-size: var(--mj-font-size-sm);
+  }
+
+  .mj-button[data-size='md'] {
+    --_btn-size: var(--mj-control-height-md);
+    --_btn-icon: var(--mj-icon-size-md);
+    padding-inline: var(--mj-space-4);
+    font-size: var(--mj-font-size-md);
+  }
+
+  .mj-button[data-size='lg'] {
+    --_btn-size: var(--mj-control-height-lg);
+    --_btn-icon: var(--mj-icon-size-lg);
+    padding-inline: var(--mj-space-5);
+    font-size: var(--mj-font-size-lg);
+  }
+
+  .mj-button[data-size='xl'] {
+    --_btn-size: var(--mj-control-height-xl);
+    --_btn-icon: var(--mj-icon-size-xl);
+    padding-inline: var(--mj-space-6);
+    font-size: var(--mj-font-size-xl);
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Modifiers
+   * ---------------------------------------------------------------- */
+
+  /* Square footprint, fully round — the circle token, not `full`, so icon
+     buttons re-shape with the rest of the system. */
+  .mj-button[data-icon-only='true'] {
+    inline-size: var(--_btn-size);
+    padding-inline: 0;
+    border-radius: var(--mj-radius-circle);
+  }
+
+  .mj-button[data-full-width='true'] {
+    inline-size: 100%;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Disabled
+   *
+   * `:disabled` covers real buttons; `[aria-disabled]` covers anchors and the
+   * cases where a control must stay focusable to be discoverable.
+   * ---------------------------------------------------------------- */
+  .mj-button:disabled,
+  .mj-button[aria-disabled='true'] {
+    background-color: var(--mj-color-bg-disabled);
+    color: var(--mj-color-fg-disabled);
+    border-color: transparent;
+    cursor: not-allowed;
+  }
+
+  /* Borderless variants stay borderless when disabled — a grey slab where a
+     ghost button used to be reads as a different component. */
+  .mj-button[data-variant='ghost']:disabled,
+  .mj-button[data-variant='ghost'][aria-disabled='true'],
+  .mj-button[data-variant='link']:disabled,
+  .mj-button[data-variant='link'][aria-disabled='true'] {
+    background-color: transparent;
+  }
+
+  .mj-button[data-variant='outline']:disabled,
+  .mj-button[data-variant='outline'][aria-disabled='true'] {
+    background-color: transparent;
+    border-color: var(--mj-color-border-disabled);
+  }
+}

@@ -34,6 +34,13 @@ comparison would prove nothing.
 A component is added in **three places**, in this order. The CSS is shared; only the bindings are
 written twice.
 
+> **Button is the worked example.** Rather than follow the sketch below from scratch, read the real
+> thing: [`packages/styles/src/components/button.css`](packages/styles/src/components/button.css),
+> [`packages/react/src/button/Button.tsx`](packages/react/src/button/Button.tsx) and
+> [`packages/angular/src/lib/button/button.ts`](packages/angular/src/lib/button/button.ts). It
+> covers the parts that get fiddly — variant/intent combinatorics, disabled states, and requiring
+> an accessible name on icon-only buttons.
+
 ### 1. Component CSS — `packages/styles/src/components/<name>.css`
 
 Style with tokens only. Never hard-code a colour or a pixel value.

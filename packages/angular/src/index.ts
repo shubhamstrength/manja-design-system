@@ -1,3 +1,5 @@
+export { ManjaButton } from './lib/button/button';
+
 export { MANJA_THEME_CONFIG, provideManjaTheme } from './lib/theme/theme.config';
 export type { ManjaThemeConfig } from './lib/theme/theme.config';
 

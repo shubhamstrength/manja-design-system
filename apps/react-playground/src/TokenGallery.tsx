@@ -1,5 +1,5 @@
 import { cssVars, tokens } from '@manja/tokens';
-import type { ReactNode } from 'react';
+import { Section } from './Section.js';
 
 /**
  * Everything below is derived from `@manja/tokens` at runtime rather than
@@ -27,24 +27,6 @@ const INTENTS = [
   ['success', cssVars.color.bg.success, cssVars.color.fg.onSuccess],
   ['info', cssVars.color.bg.info, cssVars.color.fg.onInfo],
 ] as const;
-
-function Section({
-  title,
-  note,
-  children,
-}: {
-  title: string;
-  note?: string;
-  children: ReactNode;
-}) {
-  return (
-    <section className="pg-section">
-      <h2 className="pg-section-title">{title}</h2>
-      {note ? <p className="pg-section-note">{note}</p> : null}
-      {children}
-    </section>
-  );
-}
 
 function SwatchGrid({ group }: { group: Record<string, string> }) {
   return (

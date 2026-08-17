@@ -53,7 +53,15 @@
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {
-            "port": 4300
+            "port": 4300,
+            "prebundle": {
+              "exclude": [
+                "@manja/angular",
+                "@manja/core",
+                "@manja/styles",
+                "@manja/tokens"
+              ]
+            }
           },
           "configurations": {
             "production": {

@@ -206,6 +206,21 @@ a.pg-button {
   text-overflow: ellipsis;
 }
 
+/* Intent rows x variant columns, so every combination is visible at once. */
+.pg-matrix {
+  display: grid;
+  grid-template-columns: 5rem repeat(5, minmax(0, 1fr));
+  gap: var(--mj-space-3);
+  align-items: center;
+  justify-items: start;
+}
+
+.pg-matrix-label {
+  font-family: var(--mj-font-family-mono);
+  font-size: var(--mj-font-size-xs);
+  color: var(--mj-color-fg-muted);
+}
+
 .pg-shape-box {
   block-size: 4rem;
   background-color: var(--mj-color-bg-brand-muted);

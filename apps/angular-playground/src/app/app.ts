@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ComponentGallery } from './component-gallery';
 import { ThemeSwitcher } from './theme-switcher';
 import { TokenGallery } from './token-gallery';
 
 @Component({
   selector: 'app-root',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ThemeSwitcher, TokenGallery],
+  imports: [ComponentGallery, ThemeSwitcher, TokenGallery],
   template: `
     <main class="pg-shell" id="top">
       <header class="pg-header">
@@ -20,6 +21,7 @@ import { TokenGallery } from './token-gallery';
         <app-theme-switcher />
       </header>
 
+      <app-component-gallery />
       <app-token-gallery />
     </main>
   `,
