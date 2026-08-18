@@ -324,3 +324,6 @@ packages, and both playground apps build, typecheck, lint and test from clean â€
 `Button` is the first shipped component and the reference implementation. See
 [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow that adds the next one to both frameworks at
 once.
+
+Initial UI: <img width="455" height="1143" alt="image" src="https://github.com/user-attachments/assets/2cdafa5e-f654-4c5e-9dd3-524b48552344" />
+
