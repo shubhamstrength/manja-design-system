@@ -28,6 +28,15 @@
   },
   "nx": {
     "targets": {
+      "build": {
+        "inputs": [
+          "production",
+          "^production",
+          {
+            "env": "MANJA_BASE_PATH"
+          }
+        ]
+      },
       "serve": {
         "dependsOn": [
           "^build"

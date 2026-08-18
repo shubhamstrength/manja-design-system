@@ -92,6 +92,9 @@ pnpm dev:react     # http://localhost:4200
 pnpm dev:angular   # http://localhost:4300
 ```
 
+The React playground is also published to GitHub Pages on every push to `main`:
+**<https://shubhamstrength.github.io/manja-design-system/>**
+
 | App                       | Stack                          | Proves                                              |
 | ------------------------- | ------------------------------ | --------------------------------------------------- |
 | `apps/react-playground`   | Vite 8 + React 19              | The `tsc`-built ESM packages consume cleanly        |
@@ -101,6 +104,12 @@ The Angular playground deliberately uses the **real Angular CLI builder** rather
 setup used for unit tests, because that is the bundler your Angular consumers will actually run.
 
 Nx builds the packages first — `pnpm dev:react` after changing a token gives you the new value.
+
+> **GitHub Pages serves from a subpath.** A project site lives at `/<repo>/`, not the domain
+> root, so the build sets Vite's `base` accordingly — otherwise every asset 404s and the page
+> renders as a blank shell. The workflow passes the repo name in via `MANJA_BASE_PATH`, which is
+> also part of the Nx cache key so a root-relative build can never be replayed into a deploy.
+> `vite preview` uses the same prefix, so you can check it locally before pushing.
 
 > **Angular: critical-CSS inlining is disabled on purpose.** Angular's `inlineCritical`
 > optimisation (beasties) inlines only the selectors it sees used in the static markup and defers
@@ -326,4 +335,3 @@ packages, and both playground apps build, typecheck, lint and test from clean �
 once.
 
 Initial UI: <img width="455" height="1143" alt="image" src="https://github.com/user-attachments/assets/2cdafa5e-f654-4c5e-9dd3-524b48552344" />
-
