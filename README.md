@@ -95,6 +95,11 @@ pnpm dev:angular   # http://localhost:4300
 The React playground is also published to GitHub Pages on every push to `main`:
 **<https://shubhamstrength.github.io/manja-design-system/>**
 
+> **One-time setup:** Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+> The workflow cannot do this for you — creating a Pages site needs repo-admin scope, which
+> the default `GITHUB_TOKEN` is not granted. Until it is switched on, the deploy job fails
+> with `Resource not accessible by integration`.
+
 | App                       | Stack                          | Proves                                              |
 | ------------------------- | ------------------------------ | --------------------------------------------------- |
 | `apps/react-playground`   | Vite 8 + React 19              | The `tsc`-built ESM packages consume cleanly        |
